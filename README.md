@@ -19,7 +19,7 @@ Thats it... Run the command `php artisan serve` and cheers
 ### API Documentation
 
 ---
-##Sample API JSON for (POST -  api/send?api_token={{your_api_token}})
+  * Sample API JSON for (POST -  api/send?api_token={{your_api_token}})
 
 ```
 {
@@ -57,33 +57,32 @@ Thats it... Run the command `php artisan serve` and cheers
 }
 ```
 
-##Sample API JSON for (GET -  api/list?api_token={{your_api_token}})
+  * Sample API JSON for (GET -  api/list?api_token={{your_api_token}})
 
 
 ### Task overview
 
 ---
-```
+
   * Build a simple API that supports the sending route
   * Build a Mail object which accepts email, subject, body, attachments
   * Make sure that emails are sent asynchronously, i.e. not blocking the send request
   * Test the route
-```
 
 ### Used API routes:
 
 ---
   
-  | POST  | api/send |
-  | GET   | api/list |
+  | Method  | Route |
+  | ------------- | ------------- |
+  | POST  | api/send  |
+  | GET  | api/list  |
 
   * The token is used as a URI parameter in the request api_token={{your_api_token}}
 
 ### Task Goal
 
-```
 The primary goal is for the functionality to work as expected. The idea is to spend about 4 working hours on it, maximum 8 working hours.
-```
 
 ### Task Minimum requirements
 
