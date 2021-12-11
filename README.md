@@ -12,6 +12,7 @@ Clone the repo and follow below steps.
 4. Run `php artisan key:generate` to generate application key
 5. Run `php artisan api-token:generate` to generate API token and copy the display token or if you want to fetch API token you can run `php artisan api-token:generate --fetch` (Note: We will use these token in API as api_token={{your_api_token}} where we replace  `{{your_api_token}}` with generated token )
 6. Run `php artisan migrate`
+7. Run `php artisan horizon` (For local environment) and for production environment we need to install supervisor. For more information please refer to [Horizon](https://laravel.com/docs/8.x/horizon)
 
 Thats it... Run the command `php artisan serve` and cheers
 
@@ -72,11 +73,10 @@ Thats it... Run the command `php artisan serve` and cheers
 ### Used API routes:
 
 ---
-  --------------------
+  
   | POST  | api/send |
-  --------------------
   | GET   | api/list |
-  --------------------
+
   * The token is used as a URI parameter in the request api_token={{your_api_token}}
 
 ### Task Goal
