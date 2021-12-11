@@ -3,9 +3,9 @@
 if (! function_exists('storeBase64File')) {
     function storeBase64File($attachmentObject)
     {
-        if (strpos($attachmentObject['base64_image'], ';base64') !== false) {
-            [, $attachmentObject['base64_image']] = explode(';', $attachmentObject['base64_image']);
-            [, $attachmentObject['base64_image']] = explode(',', $attachmentObject['base64_image']);
+        if (strpos($attachmentObject['base64_file'], ';base64') !== false) {
+            [, $attachmentObject['base64_file']] = explode(';', $attachmentObject['base64_file']);
+            [, $attachmentObject['base64_file']] = explode(',', $attachmentObject['base64_file']);
         }
 
 
@@ -13,7 +13,7 @@ if (! function_exists('storeBase64File')) {
 
         $newFileName = md5(date('Y-m-d H:i:s:u')).'-'.bin2hex(random_bytes(10)).'.'.$ext;
 
-		$imageData = base64_decode($attachmentObject['base64_image']);
+		$imageData = base64_decode($attachmentObject['base64_file']);
 
 		Storage::disk('local')->put($newFileName, $imageData);
 

@@ -30,33 +30,33 @@ class CheckImageBase64 implements Rule
             return true;
 
         // Means single object of attachment
-        if(array_key_exists('base64_image',$value)){
+        if(array_key_exists('base64_file',$value)){
 
-            if(empty($value['base64_image']))
+            if(empty($value['base64_file']))
                 return false;
 
-            if (strpos($value['base64_image'], ';base64') !== false) {
-                [, $value['base64_image']] = explode(';', $value['base64_image']);
-                [, $value['base64_image']] = explode(',', $value['base64_image']);
+            if (strpos($value['base64_file'], ';base64') !== false) {
+                [, $value['base64_file']] = explode(';', $value['base64_file']);
+                [, $value['base64_file']] = explode(',', $value['base64_file']);
             }
 
-            if (base64_decode($value['base64_image'], true) === false) {
+            if (base64_decode($value['base64_file'], true) === false) {
               return false;
             }
         }
 
         // Means multiple object of attachment
-        if(is_array($value) && !array_key_exists('base64_image',$value)){
+        if(is_array($value) && !array_key_exists('base64_file',$value)){
             foreach($value as $file){
-                if(empty($file['base64_image']))
+                if(empty($file['base64_file']))
                     return false;
 
-                if (strpos($file['base64_image'], ';base64') !== false) {
-                    [, $file['base64_image']] = explode(';', $file['base64_image']);
-                    [, $file['base64_image']] = explode(',', $file['base64_image']);
+                if (strpos($file['base64_file'], ';base64') !== false) {
+                    [, $file['base64_file']] = explode(';', $file['base64_file']);
+                    [, $file['base64_file']] = explode(',', $file['base64_file']);
                 }
                 
-                if (base64_decode($file['base64_image'], true) === false) {
+                if (base64_decode($file['base64_file'], true) === false) {
                   return false;
                 }
             }

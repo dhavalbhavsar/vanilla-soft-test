@@ -39,7 +39,7 @@ class EmailTest extends TestCase
                 'body' => '',
                 'attachment' => [
                     'file_name' => '',
-                    'base64_image' => ''
+                    'base64_file' => ''
                 ]
             ]
         ];
@@ -87,7 +87,7 @@ class EmailTest extends TestCase
                 'body' => $faker->paragraph,
                 'attachment' => [
                     'file_name' => 'sample.jpeg',
-                    'base64_image' => base64_encode(storage_path('sample_file/file_example_JPG_100kB.jpeg'))
+                    'base64_file' => base64_encode(storage_path('sample_file/file_example_JPG_100kB.jpeg'))
                 ]
             ],
             [
@@ -97,11 +97,11 @@ class EmailTest extends TestCase
                 'attachment' => [
                     [
                         'file_name' => 'sample123.jpeg',
-                        'base64_image' => base64_encode(storage_path('sample_file/file_example_JPG_100kB.jpeg'))
+                        'base64_file' => base64_encode(storage_path('sample_file/file_example_JPG_100kB.jpeg'))
                     ],
                     [
                         'file_name' => 'sample756.jpeg',
-                        'base64_image' => base64_encode(storage_path('sample_file/file_example_JPG_100kB.jpeg'))
+                        'base64_file' => base64_encode(storage_path('sample_file/file_example_JPG_100kB.jpeg'))
                     ]
                 ]
             ],

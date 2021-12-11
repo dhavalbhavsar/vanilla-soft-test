@@ -33,6 +33,6 @@ class EmailAttachment extends Model
      */
     public function getDownloadableAttribute()
     {
-        return route('download',$this->id);
+        return route('download',['attachment_id' => $this->id, 'api_token' => env('API_TOKEN')]);
     }
 }
