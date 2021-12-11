@@ -1,66 +1,99 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+### Interview Foundation Build
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Using latest laravel version to send multiple emails asynchronously over API
 
-## About Laravel
+### Setup
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
+Clone the repo and follow below steps.
+1. Run `composer install`
+2. Copy `.env.example` to `.env` Example for linux users : `cp .env.example .env`
+3. Set valid database credentials of env variables `DB_DATABASE`, `DB_USERNAME`, and `DB_PASSWORD`
+4. Run `php artisan key:generate` to generate application key
+5. Run `php artisan api-token:generate` to generate API token and copy the display token or if you want to fetch API token you can run `php artisan api-token:generate --fetch` (Note: We will use these token in API as api_token={{your_api_token}} where we replace  `{{your_api_token}}` with generated token )
+6. Run `php artisan migrate`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Thats it... Run the command `php artisan serve` and cheers
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### API Documentation
 
-## Learning Laravel
+---
+##Sample API JSON for (POST -  api/send?api_token={{your_api_token}})
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+{
+  "emails": [
+    {
+      "email": "abc@example.com",
+      "subject": "Test Subject",
+      "body": "Test Body",
+      "attachment": {
+        "file_name": "xxxxx.jpg",
+        "base64_file": "< Base64 Value >"
+      }
+    },
+    {
+      "email": "xyz@example.com",
+      "subject": "Test Subject",
+      "body": "Test Body",
+      "attachment": [
+        {
+          "file_name": "xxxxx.jpg",
+          "base64_file": "< Base64 Value >"
+        },
+        {
+          "file_name": "xxxxx.png",
+          "base64_file": "< Base64 Value >"
+        }
+      ]
+    },
+    {
+      "email": "pqr@example.com",
+      "subject": "Test Subject",
+      "body": "Test Body"
+    }
+  ]
+}
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+##Sample API JSON for (GET -  api/list?api_token={{your_api_token}})
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Task overview
 
-### Premium Partners
+---
+```
+  * Build a simple API that supports the sending route
+  * Build a Mail object which accepts email, subject, body, attachments
+  * Make sure that emails are sent asynchronously, i.e. not blocking the send request
+  * Test the route
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+### Used API routes:
 
-## Contributing
+---
+  --------------------
+  | POST  | api/send |
+  --------------------
+  | GET   | api/list |
+  --------------------
+  * The token is used as a URI parameter in the request api_token={{your_api_token}}
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Task Goal
 
-## Code of Conduct
+```
+The primary goal is for the functionality to work as expected. The idea is to spend about 4 working hours on it, maximum 8 working hours.
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Task Minimum requirements
 
-## Security Vulnerabilities
+  * Have an endpoint as described above that accepts an array of emails, each of them having subject, body, base64 attachments (could be many or none) and the email address where is the email going to
+  * Attachments, if provided, need to have base64 value and the name of the file
+  * Build a mail using a standard Laravel functions for it and default email provider (the one that is easiest for you to setup)
+  * Build a job to dispatch email, use the default Redis/Horizon setup
+  * Write a unit test that makes sure that the job is dispatched correctly and also is not dispatched if there’s a validation error
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Task Bonus requirements
+  
+  * Have an endpoint api/list that lists all sent emails with email, subject, body and downloadable attachments
+  * Unit test the above mentioned route (test for expected subject/body/attachment name)
