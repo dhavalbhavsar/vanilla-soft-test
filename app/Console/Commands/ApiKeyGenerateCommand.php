@@ -90,7 +90,7 @@ class ApiKeyGenerateCommand extends Command
     protected function writeNewEnvironmentFileWith($key)
     {
         file_put_contents($this->laravel->environmentFilePath(), preg_replace(
-            $this->keyReplacementPattern(),
+            $this->tokenReplacementPattern(),
             'API_TOKEN='.$key,
             file_get_contents($this->laravel->environmentFilePath())
         ));
